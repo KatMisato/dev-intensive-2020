@@ -76,7 +76,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             "Отлично - ты справился\n${question.question}" to status.color
         } else {
             errorCount++
-            if (errorCount > 3) {
+            if (errorCount > 4) {
                 status = Status.NORMAL
                 question = Question.NAME
                 errorCount = 0
