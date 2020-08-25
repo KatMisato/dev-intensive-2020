@@ -1,7 +1,6 @@
 package ru.skillbranch.devintensive.models
 
 class Bender(var status: Status = Status.NORMAL, var question: Question = Question.NAME) {
-    var errorCount: Int = 0
 
     enum class Status(val color: Triple<Int, Int, Int>) {
         NORMAL(Triple(255, 255, 255)),
@@ -71,15 +70,12 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         }
 
         return if (question.answers.contains(answer.toLowerCase())) {
-            errorCount = 0
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
         } else {
-            errorCount++
-            if (errorCount > 4) {
+            if (status == Status.CRITICAL) {
                 status = Status.NORMAL
                 question = Question.NAME
-                errorCount = 0
                 "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
             } else {
                 status = status.nextStatus()
