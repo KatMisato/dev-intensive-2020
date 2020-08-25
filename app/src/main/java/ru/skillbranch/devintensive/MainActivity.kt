@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         sendBtn.setOnClickListener(this)
 
-        messageEt.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        messageEt.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 sendText()
                 true
@@ -55,36 +55,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 false
             }
         })
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("M_MainActivity", "onRestart")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("M_MainActivity", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("M_MainActivity", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("M_MainActivity", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("M_MainActivity", "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("M_MainActivity", "onDestroy")
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -105,6 +75,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val (r, g, b) = color
         benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
         textTxt.text = pharase
+        messageEt.setText("")
         hideKeyboard()
     }
 }
