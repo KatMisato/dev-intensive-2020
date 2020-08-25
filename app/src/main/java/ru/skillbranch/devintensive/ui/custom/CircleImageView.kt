@@ -65,6 +65,11 @@ class CircleImageView @JvmOverloads constructor(
         invalidate()
     }
 
+    fun setBorderColor(@ColorRes colorId: Int) {
+        borderColor = colorId
+        invalidate()
+    }
+
     override fun onDraw(canvas: Canvas) {
         civImage = drawableToBitmap(drawable)
         updateShader()
