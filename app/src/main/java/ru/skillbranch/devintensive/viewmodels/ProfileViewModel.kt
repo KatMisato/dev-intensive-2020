@@ -34,14 +34,10 @@ class ProfileViewModel : ViewModel() {
     fun isRepositoryValid(): LiveData<Boolean> = repositoryValid
 
     fun repositoryValidation(repository: String) {
-        if (!Patterns.WEB_URL.matcher(repository).matches()) {
-            repositoryValid.value = false
-            return
-        }
         val x: MatchResult? =
             Regex("^(?:https?://)?(?:www\\.)?(?:github\\.com/)([a-zA-Z_\\d-]+)$").find(repository)
 
-        repositoryValid.value = if (x == null) false
+        val isMatches = if (x == null) false
         else x.groupValues[1] !in arrayOf(
             "enterprise",
             "features",
@@ -57,6 +53,7 @@ class ProfileViewModel : ViewModel() {
             "login",
             "join"
         )
+        repositoryValid.value = repository.isNotEmpty() && isMatches
     }
 
     fun saveProfileData(profile: Profile) {
