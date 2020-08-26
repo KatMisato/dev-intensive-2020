@@ -45,7 +45,7 @@ class CircleImageView @JvmOverloads constructor(
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             borderWidth =
-                a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WITH)
+                a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WITH.dp)
             borderColor =
                 a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
             a.recycle()
