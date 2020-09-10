@@ -88,7 +88,7 @@ object Utils {
         return value.data
     }
 
-    fun getCurrntModeColor(context: Context, attrColor: Int): Int {
+    fun getCurrentModeColor(context: Context, attrColor: Int): Int {
         val value = TypedValue()
         context.theme.resolveAttribute(attrColor, value, true)
         return value.data

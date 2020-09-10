@@ -11,6 +11,7 @@ import androidx.annotation.Dimension
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.utils.Utils.getCurrentModeColor
 import ru.skillbranch.devintensive.utils.Utils.getThemeAccentColor
 import java.lang.Integer.min
 
@@ -22,6 +23,7 @@ class CircleImageView @JvmOverloads constructor(
     AppCompatImageView(context, attrs, defStyleAttr) {
     companion object {
         private const val DEFAULT_BORDER_WITH = 2f
+
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 
@@ -66,7 +68,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     fun setBorderColor(@ColorRes colorId: Int) {
-        borderColor = colorId
+        borderColor = getCurrentModeColor(context, colorId)
         invalidate()
     }
 
