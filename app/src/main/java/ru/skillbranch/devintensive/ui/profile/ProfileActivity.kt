@@ -89,6 +89,7 @@ class ProfileActivity : AppCompatActivity() {
 
         btn_edit.setOnClickListener {
             if (wr_repository.error != null) {
+                wr_repository.error = null
                 et_repository.setText("")
             }
 
