@@ -28,7 +28,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     private var borderWidth = DEFAULT_BORDER_WITH.dp
-    private var borderColor = DEFAULT_BORDER_COLOR
+    private var borderColor = Color.parseColor("FFFFFF")
 
     private var civImage: Bitmap? = null
 
