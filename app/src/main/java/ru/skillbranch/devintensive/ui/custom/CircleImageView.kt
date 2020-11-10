@@ -6,22 +6,21 @@ import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.utils.Utils.getThemeAccentColor
-import java.lang.Integer.min
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) :
-    AppCompatImageView(context, attrs, defStyleAttr) {
+) : androidx.appcompat.widget.AppCompatImageView(context, attrs, defStyleAttr) {
     companion object {
+        @Dimension(unit = Dimension.DP)
         private const val DEFAULT_BORDER_WITH = 2f
+        @ColorInt
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 
@@ -36,13 +35,13 @@ class CircleImageView @JvmOverloads constructor(
     private var circleCenter = 0f
     private var heightCircle = 0
 
-    fun Int.toDp() : Int = (this / Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+    fun Int.toDp() : Int = (this / Resources.getSystem().displayMetrics.density).toInt()
 
     val Float.dp
         get() = this * Resources.getSystem().displayMetrics.density
 
     init {
-        if (attrs != null) {
+        attrs?.let {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             borderWidth =
                 a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WITH.dp)
@@ -66,7 +65,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     fun setBorderColor(@ColorRes colorId: Int) {
-        borderColor = colorId
+        borderColor = context.resources.getColor(colorId, context.theme)
         invalidate()
     }
 
