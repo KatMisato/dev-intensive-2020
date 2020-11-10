@@ -61,11 +61,13 @@ class CircleImageView @JvmOverloads constructor(
     fun getBorderColor(): Int = borderColor
     fun setBorderColor(hex: String) {
         borderColor = Color.parseColor(hex)
+        paintBorder.color = borderColor
         invalidate()
     }
 
     fun setBorderColor(@ColorRes colorId: Int) {
         borderColor = context.resources.getColor(colorId, context.theme)
+        paintBorder.color = borderColor
         invalidate()
     }
 
