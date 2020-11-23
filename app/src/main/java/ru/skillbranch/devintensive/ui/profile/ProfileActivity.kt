@@ -58,7 +58,7 @@ class ProfileActivity : AppCompatActivity() {
             for ((k, v) in viewFields) {
                 v.text = it[k].toString()
             }
-            iv_avatar.setImageBitmap(iv_avatar.drawInitialsAvatar(it["initials"].toString()))
+            iv_avatar.setInitials(it["initials"].toString())
         }
     }
 
