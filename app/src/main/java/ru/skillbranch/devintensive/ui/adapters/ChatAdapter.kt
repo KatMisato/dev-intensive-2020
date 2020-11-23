@@ -36,9 +36,9 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            ARCHIVE_TYPE -> SingleViewHolder(
+            ARCHIVE_TYPE -> ArchiveViewHolder(
                 inflater.inflate(
-                    R.layout.item_chat_single,
+                    R.layout.item_chat_archive,
                     parent,
                     false
                 )
@@ -105,18 +105,18 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
 
             sv_indicator.visibility = if (item.isOnline) View.VISIBLE else View.GONE
 
-            with(tv_date_single) {
+            with(tv_date_archive) {
                 visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
 
-            with(tv_counter_single) {
+            with(tv_counter_archive) {
                 visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }
 
-            tv_title_single.text = item.title
-            tv_message_single.text = item.shortDescription
+            tv_message_author_archive.text = item.title
+            tv_message_archive.text = item.shortDescription
             itemView.setOnClickListener {
                 listener.invoke(item)
             }
@@ -132,6 +132,54 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
     }
 
     inner class GroupViewHolder(convertView: View) : ChatItemViewHolder(convertView),
+        ItemTouchViewHolder {
+
+        override val containerView: View?
+            get() = itemView
+
+        override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
+            if (item.initials.isEmpty()) {
+                Utils.toInitials(item.author, "")?.let { iv_avatar_group.setInitials(it) }
+            } else {
+                iv_avatar_group.setInitials(item.initials)
+            }
+
+
+            with(tv_date_group) {
+                visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
+                text = item.lastMessageDate
+            }
+
+            with(tv_counter_group) {
+                visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
+                text = item.messageCount.toString()
+            }
+
+            tv_title_group.text = item.title
+            tv_message_group.text = item.shortDescription
+
+            with(tv_message_author) {
+                visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
+                text = item.author
+            }
+
+            itemView.setOnClickListener {
+                listener.invoke(item)
+            }
+            tv_message_author.text = item.author
+
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemCleared() {
+            itemView.setBackgroundColor(Color.WHITE)
+        }
+    }
+
+    inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView),
         ItemTouchViewHolder {
 
         override val containerView: View?
