@@ -45,7 +45,7 @@ class MainViewModel : ViewModel() {
                 it.title.contains(
                     queryStr,
                     true
-                )
+                ) || it.chatType == ChatType.ARCHIVE
             }
         }
         result.addSource(chats) { filterF.invoke() }
