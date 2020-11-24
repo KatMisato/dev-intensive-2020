@@ -89,7 +89,7 @@ class MainViewModel : ViewModel() {
             lastChatItem.lastMessageDate()?.shortFormat(),
             false,
             ChatType.ARCHIVE,
-            lastChatItem.lastMessageShort().second
+            "@${lastChatItem.lastMessageShort().second}"
         )
     }
 }
