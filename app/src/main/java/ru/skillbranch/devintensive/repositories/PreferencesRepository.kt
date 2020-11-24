@@ -4,7 +4,32 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.App
-import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
+
+data class Profile(
+    val firstName: String,
+    val lastName: String,
+    val about: String,
+    val repository: String,
+    val rating: Int = 0,
+    val respect: Int = 0
+) {
+    val nickName: String = Utils.transliteration(firstName + "_" + lastName)
+    val rank: String = "Junior Android developer"
+    val initials = Utils.toInitials(firstName, lastName) ?: ""
+
+    fun toMap(): Map<String, Any> = mapOf(
+        "nickname" to nickName,
+        "rank" to rank,
+        "firstName" to firstName,
+        "lastName" to lastName,
+        "initials" to initials,
+        "about" to about,
+        "repository" to repository,
+        "rating" to rating,
+        "respect" to respect
+    )
+}
 
 object PreferencesRepository {
     private const val FIRST_NAME = "FIRST_NAME"

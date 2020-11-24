@@ -1,8 +1,30 @@
 package ru.skillbranch.devintensive.extensions
 
 import ru.skillbranch.devintensive.models.data.User
-import ru.skillbranch.devintensive.models.UserView
 import ru.skillbranch.devintensive.utils.Utils
+
+class UserView(
+    val id: String,
+    var fullName: String,
+    var nickName: String,
+    var avatar: String? = null,
+    var status: String = "offline",
+    var initials: String?
+) {
+
+    fun printMe() {
+        println(
+            """
+            id: $id,
+            fullName: $fullName,
+            nickName: $nickName,
+            avatar: $avatar,
+            status: $status,
+            initials: $initials
+        """.trimIndent()
+        )
+    }
+}
 
 fun User.toUserView(): UserView {
     val nickName = Utils.transliteration("$firstName $lastName")

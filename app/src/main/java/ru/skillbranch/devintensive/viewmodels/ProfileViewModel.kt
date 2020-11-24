@@ -1,13 +1,12 @@
 package ru.skillbranch.devintensive.viewmodels
 
 import android.util.Log
-import android.util.Patterns
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.repositories.PreferencesRepository
+import ru.skillbranch.devintensive.repositories.Profile
 
 class ProfileViewModel : ViewModel() {
     private val repository: PreferencesRepository = PreferencesRepository
