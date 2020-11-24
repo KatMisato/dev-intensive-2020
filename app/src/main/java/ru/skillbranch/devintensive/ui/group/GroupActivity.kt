@@ -39,6 +39,7 @@ class GroupActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.group_activity_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

@@ -19,7 +19,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.toRectF
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.extensions.dpToPx
 import kotlin.math.max
 
 class AvatarImageView @JvmOverloads constructor(
@@ -77,6 +76,8 @@ class AvatarImageView @JvmOverloads constructor(
                 )
 
             initials = ta.getString(R.styleable.AvatarImageView_aiv_initials) ?: "??"
+
+            avatarPaint.color = Color.parseColor("#9CA9BA")
             ta.recycle()
         }
         scaleType = ScaleType.CENTER_CROP
@@ -298,4 +299,8 @@ class AvatarImageView @JvmOverloads constructor(
             override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
         }
     }
+}
+
+fun Context.dpToPx(dp:Int): Float {
+    return dp.toFloat() * this.resources.displayMetrics.density
 }

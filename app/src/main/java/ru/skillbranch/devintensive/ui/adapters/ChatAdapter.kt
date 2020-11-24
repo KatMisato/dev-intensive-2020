@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_chat_archive.*
 import kotlinx.android.synthetic.main.item_chat_group.*
+import kotlinx.android.synthetic.main.item_chat_group.iv_avatar_group
 import kotlinx.android.synthetic.main.item_chat_single.*
 import kotlinx.android.synthetic.main.item_chat_single.sv_indicator
 import ru.skillbranch.devintensive.R
@@ -105,18 +107,18 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
 
             sv_indicator.visibility = if (item.isOnline) View.VISIBLE else View.GONE
 
-            with(tv_date_archive) {
+            with(tv_date_single) {
                 visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
 
-            with(tv_counter_archive) {
+            with(tv_counter_single) {
                 visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }
 
-            tv_message_author_archive.text = item.title
-            tv_message_archive.text = item.shortDescription
+            tv_title_single.text = item.title
+            tv_message_single.text = item.shortDescription
             itemView.setOnClickListener {
                 listener.invoke(item)
             }
@@ -179,34 +181,24 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
         }
     }
 
-    inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView),
-        ItemTouchViewHolder {
-
+    inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView) {
         override val containerView: View?
             get() = itemView
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
-            if (item.initials.isEmpty()) {
-                Utils.toInitials(item.author, "")?.let { iv_avatar_group.setInitials(it) }
-            } else {
-                iv_avatar_group.setInitials(item.initials)
-            }
-
-
-            with(tv_date_group) {
+            with(tv_date_archive) {
                 visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
 
-            with(tv_counter_group) {
+            with(tv_counter_archive) {
                 visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }
 
-            tv_title_group.text = item.title
-            tv_message_group.text = item.shortDescription
+            tv_message_archive.text = item.shortDescription
 
-            with(tv_message_author) {
+            with(tv_message_author_archive) {
                 visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
                 text = item.author
             }
@@ -214,16 +206,6 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
             itemView.setOnClickListener {
                 listener.invoke(item)
             }
-            tv_message_author.text = item.author
-
-        }
-
-        override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
-        }
-
-        override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
         }
     }
 }
