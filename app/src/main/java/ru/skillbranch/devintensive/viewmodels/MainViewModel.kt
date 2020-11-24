@@ -72,8 +72,7 @@ class MainViewModel : ViewModel() {
     }
 
     private fun createArchiveItem(chatsArchived: List<Chat>): ChatItem {
-        val messageCount =
-            chatsArchived.fold(0) { acc, chat -> acc + chat.unreadableMessageCount() }
+        val messageCount = chatsArchived.fold(0) { acc, chat -> acc + chat.unreadableMessageCount() }
 
         val lastChatItem =
             if (chatsArchived.none { it.unreadableMessageCount() != 0 }) chatsArchived.last() else
