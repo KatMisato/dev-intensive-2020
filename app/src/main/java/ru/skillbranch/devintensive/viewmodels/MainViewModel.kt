@@ -50,6 +50,7 @@ class MainViewModel : ViewModel() {
         }
         result.addSource(chats) { filterF.invoke() }
         result.addSource(query) { filterF.invoke() }
+
         return result
     }
 
