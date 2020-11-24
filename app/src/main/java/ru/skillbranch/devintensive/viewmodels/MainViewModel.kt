@@ -45,7 +45,7 @@ class MainViewModel : ViewModel() {
                 it.title.contains(
                     queryStr,
                     true
-                ) || it.chatType == ChatType.ARCHIVE
+                )
             }
         }
         result.addSource(chats) { filterF.invoke() }
@@ -84,7 +84,7 @@ class MainViewModel : ViewModel() {
             "-1",
             "",
             "",
-            "",
+            "Архив чатов",
             lastChatItem.lastMessageShort().first,
             messageCount,
             lastChatItem.lastMessageDate()?.shortFormat(),
